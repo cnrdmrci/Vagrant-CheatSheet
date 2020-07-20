@@ -18,3 +18,24 @@ Ardından aşağıdaki vagrant up komutuyla sanal makinenin çalışması sağla
 > vagrant up 
 
 Böylece saniyeler içerisinde sanal makinemiz kullanıma hazır olmuştur.
+
+### Sanal makine uykuya alma, uyandırma, kapatma ve kaldırma
+Sanal makine kapatmak için
+
+> vagrant halt
+
+Sanal makine kaldırmak için
+
+> vagrant destroy -f
+
+Sanal makine yeniden başlatmak için
+
+> vagrant reload
+
+Sanal makine uyguya almak için
+
+> vagrant suspend
+
+Sanal makine uyandırmak için
+
+> vagrant resume
