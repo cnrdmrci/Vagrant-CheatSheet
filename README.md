@@ -1,4 +1,4 @@
-# Vagrant CheatSheet
+# Vagrant
 
 ### Vagrant nedir?
 Vagrant bir sanal makine oluşturma aracıdır ve Vagrantfile adında bir konfigürasyon dosyasına talimatlar verilerek istenilen sanal makineyi çok kısa bir süre içerisinde çalışır duruma getirebilmektedir. 
@@ -39,3 +39,34 @@ Sanal makine uyguya almak için
 Sanal makine uyandırmak için
 
 > vagrant resume
+
+### Vagrant Box oluşturma
+Oluşturulan sanal makine farklı ortamlara taşınmak üzere box olarak saklanabilmektedir.
+
+> vagrant package --output new.box
+
+Oluşturulan box farklı ortamlarda aşağıdaki şekilde çalıştırılabilmektedir.
+
+> vagrant box add new.box --name newbox
+
+## Vagrantfile
+
+### Box
+Vagrantfile içerisindeki konfigürasyona göre box ifadesi, sanal makine işletim sisteminin adı belirtilmektedir.
+```ruby
+Vagrant.configure(2) do |config|
+    config.vm.box = "Centos/7"
+end
+```
+
+### Provider
+Vagrant yazılımının sanallaştırma işlemini yerine getiren programların tanımlandığı anahtar kelimedir. Default olarak open source olan VirtualBox kullanılmaktadır. Ayrıca farklı sanallaştırma sağlayan programlarla da; provider konfigürasyonu ile ayarlama sağlanmaktadır.
+
+### Network
+Vagrant ile oluşturulan sanal makinelerin haberleşmeleri ile ilgili ayarların yapılması sağlanmaktadır.
+
+### Sync
+Sanal makinelerdeki dosyaların paylaşılması sağlanmaktadır.
+
+### Provisioner
+Sanal sunuculara gerekli yazılımların yüklenmesini sağlamaktadır. Vagrantfile ile Ansible, Chef, Puppet veya Shell script yapılandırma için kullanılabilir.
