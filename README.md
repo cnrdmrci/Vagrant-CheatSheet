@@ -61,12 +61,46 @@ end
 
 ### Provider
 Vagrant yazılımının sanallaştırma işlemini yerine getiren programların tanımlandığı anahtar kelimedir. Default olarak open source olan VirtualBox kullanılmaktadır. Ayrıca farklı sanallaştırma sağlayan programlarla da; provider konfigürasyonu ile ayarlama sağlanmaktadır.
+```ruby
+Vagrant.configure(2) do |config|
+    config.vm.box = "Centos/7"
+    config.vm.provider "virtualbox" do |vb|
+        # vb.gui = true
+        vb.memory = "1024"
+        vb.cpus = 2
+    end
+end
+```
 
 ### Network
 Vagrant ile oluşturulan sanal makinelerin haberleşmeleri ile ilgili ayarların yapılması sağlanmaktadır.
+```ruby
+Vagrant.configure(2) do |config|
+    config.vm.box = "Centos/7"
+    config.vm.network "private_network", ip: "192.168.0.10"
+    # config.vm.network "forwarded_port", guest: 80, host: 8080
+    # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    # config.vm.network "public_network"
+end
+```
 
 ### Sync
 Sanal makinelerdeki dosyaların paylaşılması sağlanmaktadır.
+```ruby
+Vagrant.configure(2) do |config|
+    config.vm.box = "Centos/7"
+    config.vm.synced_folder "./data", "vagrant_data"
+end
+```
 
 ### Provisioner
 Sanal sunuculara gerekli yazılımların yüklenmesini sağlamaktadır. Vagrantfile ile Ansible, Chef, Puppet veya Shell script yapılandırma için kullanılabilir.
+```ruby
+Vagrant.configure(2) do |config|
+    config.vm.box = "Centos/7"
+    config.vm.provision "shell", inline: <<-SHELL
+        yum install git
+    SHELL
+    # config.vm.provision "shell", path: "config.sh"
+end
+```
